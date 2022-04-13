@@ -87,6 +87,7 @@ const main = async (): Promise<void> => {
 
   const glHelper = new GLHelper(gl, shaderProgram);
 
+  // TODO: 1
   let then = 0;
   const render = (now) => {
     now *= 0.01;
