@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tubes 2 Grafkom</title>
+        <script src="main.js" type="module"></script>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="row">
+            <div class="canvas">
+                <canvas id="gl-canvas"></canvas>
+            </div>
+            <div class="load-save-container">
+                <table>
+                    <tr>
+                        <td>
+                            <p>Save/Load File</p>
+                            <button id="save-button">Save Button</button>
+                            <div class="load-container">
+                                <input type="file" name="load" id="load-input" />
+                            </div>
+                        </td>
+                    </tr>
+                    <br />
+                    <tr>
+                        <td>
+                            <br />
+                            <p>Help Menu</p>
+                            <button id="help" onclick="window.open('help.html','_blank')">Help Me</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br>
+                            <p>Reset</p>
+                            <button id="reset-button">Reset</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panel">
+                <div>
+                    <p>Object Control Panel</p>
+                    <table>
+                        <tr>
+                            <td><label>Shading Mode</label></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="range" min="0" max="1" id="shadingMode" value="1" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>Projection Mode</label></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="range" min="0" max="2" id="projectionMode" value="0" />
+                                <label id="projectionModeText">Orthographic</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>Translasi</label></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>X</label>
+                                <input type="range" min="-1000" max="1000" id="xTranslasi" value="0" />
+                                <label id="xTranslasiText"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Y</label>
+                                <input type="range" min="-1000" max="1000" id="yTranslasi" value="0" />
+                                <label id="yTranslasiText"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Z</label>
+                                <input type="range" min="-1000" max="1000" id="zTranslasi" value="0" />
+                                <label id="zTranslasiText"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>Rotasi</label></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>X</label>
+                                <input type="range" min="0" max="360" value="0" id="xRotasi" />
+                                <label id="xRotasiText"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Y</label>
+                                <input type="range" min="0" max="360" value="0" id="yRotasi"  />
+                                <label id="yRotasiText"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Z</label>
+                                <input type="range" min="0" max="360" value="0" id="zRotasi" />
+                                <label id="zRotasiText"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label>Scale</label></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>X</label>
+                                <input type="range" min="0" max="1000"  id="xScale" value="500" />
+                                <label id="xScaleText"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Y</label>
+                                <input type="range" min="0" max="1000" id="yScale" value="500" />
+                                <label id="yScaleText"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Z</label>
+                                <input type="range" min="0" max="1000" id="zScale" value="500" />
+                                <label id="zScaleText"></label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="camera">
+                <table>
+                    <tr>
+                        <p>Camera Setting</p>
+                    </tr>
+                    <tr>
+                        <p>Camera Zoom</p>
+                        <input type="range" min="0" max="1000" id="cameraZoom"/>
+                        <label id="cameraZoomText"></label>
+                    </tr>
+                    <tr>
+                        <p>Camera Angle</p>
+                        <input type="range" min="0" max="3600" id="cameraAngle" />
+                        <label id="cameraAngleText"></label>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </body>
+</html>
