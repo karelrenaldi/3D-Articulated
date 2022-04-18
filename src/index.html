@@ -17,10 +17,10 @@
                 <table>
                     <tr>
                         <td>
-                            <p>Save/Load File</p>
-                            <button id="save-button">Save Button</button>
+                            <h3>Save/Load File</h3>
+                            <button id="save">Save Model</button>
                             <div class="load-container">
-                                <input type="file" name="load" id="load-input" />
+                                <input type="file" name="load" id="load" />
                             </div>
                         </td>
                     </tr>
@@ -28,29 +28,32 @@
                     <tr>
                         <td>
                             <br />
-                            <p>Help Menu</p>
-                            <button id="help" onclick="window.open('help.html','_blank')">Help Me</button>
+                            <h3>Help Menu</h3>
+                            <button id="help" onclick="window.open('help.html','_blank')">Help Me!</button>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <br>
-                            <p>Reset</p>
-                            <button id="reset-button">Reset</button>
+                            <h3>Reset View</h3>
+                            <button id="reset">Reset Model</button>
                         </td>
                     </tr>
                 </table>
             </div>
             <div class="panel">
                 <div>
-                    <p>Object Control Panel</p>
+                    <h3>Object Control Panel</h3>
                     <table>
                         <tr>
                             <td><label>Shading Mode</label></td>
                         </tr>
                         <tr>
-                            <td>
-                                <input type="range" min="0" max="1" id="shadingMode" value="1" />
+                            <td> 
+                                <select name="shadingMode" id="shadingMode">
+                                    <option id="ButtonDefault" value="defaultview">Default View</option>
+                                    <option id="ButtonShading" value="shadingmode">Shading Mode</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
@@ -58,99 +61,279 @@
                         </tr>
                         <tr>
                             <td>
-                                <input type="range" min="0" max="2" id="projectionMode" value="0" />
-                                <label id="projectionModeText">Orthographic</label>
+                                <select name="projectionMode" id="projectionMode">
+                                    <option id="ButtonProjection-1" value="orthographic">Orthographic</option>
+                                    <option id="ButtonProjection-2" value="oblique">Oblique</option>
+                                    <option id="ButtonProjection-3" value="perspective">Perspective</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
-                            <td><label>Translasi</label></td>
+                            <td><label>Texture Mapping Mode</label></td>
                         </tr>
                         <tr>
                             <td>
-                                <label>X</label>
-                                <input type="range" min="-1000" max="1000" id="xTranslasi" value="0" />
+                                <select name="textureMappingMode" id="textureMappingMode">
+                                    <option id="ButtonTexture-1" value="image">Image</option>
+                                    <option id="ButtonTexture-2" value="environment">Environment</option>
+                                    <option id="ButtonTexture-3" value="bump">Bump</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <p>Animation Control</p>
+                            <button id="ButtonAnimate">Animate Model</button>
+                        </tr>
+                        <tr>
+                            <p>Auto Rotation Control</p>
+                            <select name="textureMappingMode" id="textureMappingMode">
+                                <option id="ButtonX" value="rotateX">Rotate X</option>
+                                <option id="ButtonY" value="rotateY">Rotate Y</option>
+                                <option id="ButtonZ" value="rotateZ">Rotate Z</option>
+                            </select>
+                        </tr>
+                        <tr>
+                            <td><label>Model View</label></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Translasi X</label>
+                                <input type="range" class="slider" step="0.01" min="-1000" max="1000" id="PositionX" value="0" />
                                 <label id="xTranslasiText"></label>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label>Y</label>
-                                <input type="range" min="-1000" max="1000" id="yTranslasi" value="0" />
+                                <label>Translasi Y</label>
+                                <input type="range" class="slider" step="0.01" min="-1000" max="1000" id="PositionY" value="0" />
                                 <label id="yTranslasiText"></label>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label>Z</label>
-                                <input type="range" min="-1000" max="1000" id="zTranslasi" value="0" />
+                                <label>Translasi Z</label>
+                                <input type="range" class="slider" step="0.01" min="-1000" max="1000" id="PositionZ" value="0" />
                                 <label id="zTranslasiText"></label>
                             </td>
                         </tr>
                         <tr>
-                            <td><label>Rotasi</label></td>
-                        </tr>
-                        <tr>
                             <td>
-                                <label>X</label>
-                                <input type="range" min="0" max="360" value="0" id="xRotasi" />
+                                <label>Rotasi X</label>
+                                <input type="range" class="slider" step="0.01" min="0" max="360" value="0" id="AngleX" />
                                 <label id="xRotasiText"></label>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label>Y</label>
-                                <input type="range" min="0" max="360" value="0" id="yRotasi"  />
+                                <label>Rotasi Y</label>
+                                <input type="range" class="slider" step="0.01" min="0" max="360" value="0" id="AngleY"  />
                                 <label id="yRotasiText"></label>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label>Z</label>
-                                <input type="range" min="0" max="360" value="0" id="zRotasi" />
+                                <label>Rotasi Z</label>
+                                <input type="range" class="slider" step="0.01" min="0" max="360" value="0" id="AngleZ" />
                                 <label id="zRotasiText"></label>
                             </td>
                         </tr>
                         <tr>
-                            <td><label>Scale</label></td>
-                        </tr>
-                        <tr>
                             <td>
-                                <label>X</label>
-                                <input type="range" min="0" max="1000"  id="xScale" value="500" />
+                                <label>Scale X</label>
+                                <input type="range" class="slider" step="0.01" min="0" max="1000"  id="ScaleX" value="500" />
                                 <label id="xScaleText"></label>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label>Y</label>
-                                <input type="range" min="0" max="1000" id="yScale" value="500" />
+                                <label>Scale Y</label>
+                                <input type="range" class="slider" step="0.01" min="0" max="1000" id="ScaleY" value="500" />
                                 <label id="yScaleText"></label>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label>Z</label>
-                                <input type="range" min="0" max="1000" id="zScale" value="500" />
+                                <label>Scale Z</label>
+                                <input type="range" class="slider" step="0.01" min="0" max="1000" id="ScaleZ" value="500" />
                                 <label id="zScaleText"></label>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
+            <div class="panel2">
+                <table>
+                    <tr>
+                        <td><label>Model Direct Control</label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 1</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-1" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 2</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-2" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 3</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-3" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 4</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-4" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 5</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-5" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 6</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-6" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 7</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-7" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 8</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-8" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 9</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-9" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 10</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-10" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 11</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-11" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 12</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-12" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 13</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-13" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 14</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-14" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 15</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-15" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 16</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-16" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 17</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-17" value="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Part 18</label>
+                            <input type="range" class="slider" step="0.01" min="0" max="1" id="part-18" value="0" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
             <div class="camera">
                 <table>
                     <tr>
-                        <p>Camera Setting</p>
+                        <h3>Camera Setting</h3>
                     </tr>
                     <tr>
-                        <p>Camera Zoom</p>
-                        <input type="range" min="0" max="1000" id="cameraZoom"/>
-                        <label id="cameraZoomText"></label>
+                        <td>
+                            <label id="Center-X-info">Translasi X</label>
+                        <input id="Center-X" type="range" class="slider" step="0.01" min="0" max="1000" id="cameraZoom"/>
+                        </td>
                     </tr>
                     <tr>
-                        <p>Camera Angle</p>
-                        <input type="range" min="0" max="3600" id="cameraAngle" />
-                        <label id="cameraAngleText"></label>
+                        <td>
+                            <label id="Center-Y-info">Translasi Y</label>
+                        <input id="Center-Y" type="range" class="slider" step="0.01" min="0" max="1000" id="cameraZoom"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label id="Center-Z-info">Translasi Z</label>
+                        <input id="Center-Z" type="range" class="slider" step="0.01" min="0" max="1000" id="cameraZoom"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label id="Up-X-info">Rotasi X</label>
+                        <input id="Up-X" type="range" class="slider" step="0.01" min="0" max="1000" id="cameraZoom"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label id="Up-Y-info">Rotasi Y</label>
+                        <input id="Up-Y" type="range" class="slider" step="0.01" min="0" max="1000" id="cameraZoom"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label id="Up-Z-info">Rotasi Z</label>
+                        <input id="Up-Z" type="range" class="slider" step="0.01" min="0" max="1000" id="cameraZoom"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label id="Eye-X-info">Scale X</label>
+                        <input id="Eye-X" type="range" class="slider" step="0.01" min="0" max="1000" id="cameraZoom"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label id="Eye-Y-info">Scale Y</label>
+                        <input id="Eye-Y" type="range" class="slider" step="0.01" min="0" max="1000" id="cameraZoom"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label id="Eye-Z-info">Scale Z</label>
+                        <input id="Eye-Z" type="range" class="slider" step="0.01" min="0" max="1000" id="cameraZoom"/>
+                        </td>
                     </tr>
                 </table>
             </div>
