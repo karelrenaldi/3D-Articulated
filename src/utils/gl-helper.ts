@@ -48,6 +48,8 @@ export class GLHelper {
     this.position = DEFAULT_VALUE.position;
     this.rotation = DEFAULT_VALUE.rotation;
     this.rotationModel = [180,0,0];
+    this.attribLoc = this.getAttribLocation();
+    this.uniformLoc = this.getUniformLocation();
 
     this.rotateAxis = 0;
     this.projectMode = 0;
@@ -180,8 +182,21 @@ export class GLHelper {
 
     this.vertexPosition = vertexPosition;
 		this.facesColor = facesColor;
-    this.buffers = [];
+    // this.buffers = [];
 
+    // const length_rusuk = obj.num_rusuk;
+    // for (let i = 0; i < obj.num_rusuk; i++) {
+    //   const rusuk = obj.rusuk[i];
+    //   const length_sisi = rusuk.num_sisi;
+    //   const index = rusuk.index;
+    //   for (let j = 0; j < length_sisi; j++) {
+    //     Array.prototype.push.apply(this.vertexPosition, obj.vertex[index[j][0]]);
+    //     Array.prototype.push.apply(this.facesColor, rusuk.color[j]);
+    //   }
+    // }
+    for (let i = 0; i < obj.num_rusuk; i++) {
+      this.initNodes(i);
+    }
   }
 
   startProjectCalc(aspectRatio: number, projectMode: number): number[] {
@@ -216,7 +231,8 @@ export class GLHelper {
     return {
       aVertexPosition: this.gl.getAttribLocation(this.shaderProgram, 'aVertexPosition'),
       aVertexColor: this.gl.getAttribLocation(this.shaderProgram, "aVertexColor"),
-      aVertexNormal: this.gl.getAttribLocation(this.shaderProgram, 'aVertexNormal')
+      aVertexNormal: this.gl.getAttribLocation(this.shaderProgram, 'aVertexNormal'),
+      aTextureCoord: this.gl.getAttribLocation(this.shaderProgram, 'aTextureCoord')
     }
   }
 
@@ -283,39 +299,48 @@ export class GLHelper {
     // buffVertex: BufferVertex,
     diffTime: number,
     // verticesCount: number
+    nodeModel: NodeModel
     ): void {
     console.log('drawScene');
-    this.attribLoc = this.getAttribLocation();
     
     this.rotationModel[1] += 0.2;
 
 		let gl = this.gl;
 		gl.enable(gl.DEPTH_TEST); // Enable depth testing
 		gl.depthFunc(gl.LEQUAL); // Near things obscure far things
-
     
-		// let listVertexPosition = []
 		if (this.vertexPosition) {
-      var maxX = this.vertexPosition[0][0];
-      var minX = this.vertexPosition[0][0];
-      var maxY = this.vertexPosition[0][1];
-      var minY = this.vertexPosition[0][1];
-      var maxZ = this.vertexPosition[0][2];
-      var minZ = this.vertexPosition[0][2];
-      for (let i = 0; i < this.vertexPosition.length; i++) {        
-        // if (this.vertexPosition[i].length > 3) {
-          const verticeX = this.vertexPosition[i][0];
-          const verticeY = this.vertexPosition[i][1];
-          const verticeZ = this.vertexPosition[i][2];
+      var listVertex: number[] = [];
+      const colors = [];
+      for (let i = 0; i < this.vertexPosition.length; i++) {
+        Array.prototype.push.apply(listVertex, this.vertexPosition[i]);
+        
+        for (let j = 0; j < this.facesColor[i].length; ++j) {
+          for (let k = 0; k < 4; ++k) {
+            for (let l = 0; l < this.facesColor[i][j].length; ++l) {
+              colors.push(this.facesColor[i][j][l]);
+            }
+          }
+        }
+      }
+      var maxX = listVertex[0];
+      var minX = listVertex[0];
+      var maxY = listVertex[1];
+      var minY = listVertex[1];
+      var maxZ = listVertex[2];
+      var minZ = listVertex[2];
+      if (listVertex.length > 3) {
+        for (let i = 3; i < listVertex.length; i+=3) {        
+          const verticeX = listVertex[i];
+          const verticeY = listVertex[i+1];
+          const verticeZ = listVertex[i+2];
           if (verticeX < minX) minX = verticeX;
           if (verticeY < minY) minY = verticeY;
           if (verticeZ < minZ) minZ = verticeZ;
           if (maxX < verticeX) maxX = verticeX;
           if (maxY < verticeY) maxY = verticeY;
-          if (maxZ < verticeZ) maxZ = verticeZ;2
-          // for (let j = 0; j < this.vertexPosition[i].length; j+=3) {
-          // }
-        // }
+          if (maxZ < verticeZ) maxZ = verticeZ;
+        }
       }
       console.log('vertexPos');
       console.log(this.vertexPosition);
@@ -363,19 +388,6 @@ export class GLHelper {
       // Create shading and lighting matrix
       let normalMatrix = m4.inverse(modelViewMatrix);
       normalMatrix = m4.transpose(normalMatrix);
-      var listVertex: number[] = [];
-      const colors = [];
-      for (let i = 0; i < this.vertexPosition.length; i++) {
-        Array.prototype.push.apply(listVertex, this.vertexPosition[i]);
-        
-        for (let j = 0; j < this.facesColor[i].length; ++j) {
-          for (let k = 0; k < 4; ++k) {
-            for (let l = 0; l < this.facesColor[i][j].length; ++l) {
-              colors.push(this.facesColor[i][j][l]);
-            }
-          }
-        }
-      }
         
       var mModel = m4.identity();
       mModel = m4.translate(mModel, (minX+maxX)/2, (minY+maxY)/2, (minZ+maxZ)/2);
@@ -390,11 +402,13 @@ export class GLHelper {
 
       // Start shading with the shader program
       this.startShading(gl, projectionMatrix, normalMatrix);
-      this.putModelViewMatrix(modelViewMatrix);
+      // this.putModelViewMatrix(modelViewMatrix);
       
       for (let i = 0; i < this.vertexPosition.length; ++i) {
         gl.drawElements(gl.TRIANGLES, this.vertexPosition[i].length / 2, gl.UNSIGNED_SHORT, 0);
       }
+      var stackModelViewMatrix: number[][] = [[]];
+      this.traverse(nodeModel, modelViewMatrix, stackModelViewMatrix);
     }
     this.gl = gl;
   }
@@ -453,12 +467,13 @@ export class GLHelper {
 		return nodeModel;
 	}
 
-  initNodes(id) {
+  initNodes(id: number): void {
     var mNode = m4.identity();
-    var sibling, child;
-    let tx = this.nodeListData[id].joint_point[0];
-    let ty = this.nodeListData[id].joint_point[1];
-    let tz = this.nodeListData[id].joint_point[2];
+    let sibling = this.nodeListData[id].sibling;
+    let child = this.nodeListData[id].child;
+    let tx = this.nodeListData[id].pointNode[0];
+    let ty = this.nodeListData[id].pointNode[1];
+    let tz = this.nodeListData[id].pointNode[2];
     this.theta[id] = this.nodeListData[id].degree;
     for (let i = 0; i < 3; i++) {
       if (this.theta[id][i] > this.nodeListData[id].maxDegree[i]) {
