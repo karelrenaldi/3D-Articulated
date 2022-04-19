@@ -94,15 +94,16 @@ const main = async (): Promise<void> => {
     const deltaTime = now - then;
     then = now;
     glHelper.cleanScreen();
-    if (glHelper.vertexPosition) {
-      for (let i = 0; i < glHelper.vertexPosition.length; ++i) {
-        glHelper.drawScene(
-          glHelper.buffers[i],
-          deltaTime,
-          glHelper.vertexPosition[i].length
-        );
-      }
-    }
+    // if (glHelper.vertexPosition) {
+    //   for (let i = 0; i < glHelper.vertexPosition.length; ++i) {
+    //     glHelper.drawScene(
+    //       glHelper.buffers[i],
+    //       deltaTime,
+    //       glHelper.vertexPosition[i].length
+    //     );
+    //   }
+    // }
+    glHelper.drawScene(deltaTime);
     requestAnimationFrame(render);
   };
   requestAnimationFrame(render);
