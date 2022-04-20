@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Tubes 2 Grafkom</title>
+        <title>Tubes 3 Grafkom</title>
         <script src="main.js" type="module"></script>
         <link rel="stylesheet" href="style.css" />
     </head>
@@ -84,16 +84,17 @@
                             <p>Animation Control</p>
                             <button id="ButtonAnimate">Animate Model</button>
                         </tr>
-                        <tr>
+                        <tr> 
                             <p>Auto Rotation Control</p>
-                            <select name="textureMappingMode" id="textureMappingMode">
+                            <select name="ButtonRotate" id="ButtonRotate">
+                                <option id="ButtonT" value="rotateOff">Rotate Off</option>
                                 <option id="ButtonX" value="rotateX">Rotate X</option>
                                 <option id="ButtonY" value="rotateY">Rotate Y</option>
                                 <option id="ButtonZ" value="rotateZ">Rotate Z</option>
                             </select>
                         </tr>
                         <tr>
-                            <td><label>Model View</label></td>
+                            <td><label>Model View Control</label></td>
                         </tr>
                         <tr>
                             <td>
@@ -339,5 +340,131 @@
             </div>
 
         </div>
+
+        <script id="vertex-shader-2d" type="x-shader/x-fragment">
+            attribute vec4 aVPos;
+attribute vec3 aVNormal;
+attribute vec3 aVTangent;
+attribute vec3 aVBitangent;
+attribute vec2 aTexCoord;
+
+uniform mat4 uNormalM;
+uniform mat4 uModelViewM;
+uniform mat4 uProjM;
+
+varying highp vec2 vTextureCoord;
+varying highp vec3 vLighting;
+varying vec3 vWorldPosition;
+varying vec3 vWorldNormal;
+uniform int texType1;
+
+varying vec3 ts_light_pos;
+varying vec3 ts_view_pos;
+varying vec3 ts_frag_pos;
+
+mat3 transpose(in mat3 inMatrix)
+{
+    vec3 i0 = inMatrix[0];
+    vec3 i1 = inMatrix[1];
+    vec3 i2 = inMatrix[2];
+
+    mat3 outMatrix = mat3(
+        vec3(i0.x, i1.x, i2.x),
+        vec3(i0.y, i1.y, i2.y),
+        vec3(i0.z, i1.z, i2.z)
+    );
+
+    return outMatrix;
+}
+
+void main(void) {
+    if (texType1 == 0){
+        gl_Position = uProjM * uModelViewM * aVPos;
+        vTextureCoord = aTexCoord;
+        // Apply lighting effect
+        highp vec3 ambientLight = vec3(0.3, 0.3, 0.3);
+        highp vec3 directionalLightColor = vec3(1, 1, 1);
+        highp vec3 directionalVector = normalize(vec3(0.85, 0.8, 0.75));
+
+        highp vec4 transformedNormal = uNormalM * vec4(aVNormal, 1.0);
+
+        highp float directional = max(dot(transformedNormal.xyz, directionalVector), 0.0);
+        vLighting = ambientLight + (directionalLightColor * directional);
+    } else if (texType1 == 1){
+        gl_Position = uProjM * uModelViewM * aVPos;
+        
+        // Send the view position to the fragment shader
+        vWorldPosition = (uModelViewM * aVPos).xyz;
+        
+        // Orient the normals and pass to the fragment shader
+        vWorldNormal = mat3(uModelViewM) * aVNormal;
+    } else {
+        gl_Position = uProjM * uModelViewM * aVPos;
+        ts_frag_pos = vec3(uModelViewM * aVPos);
+        
+        vec3 t = normalize(mat3(uNormalM) * aVTangent);
+        vec3 b = normalize(mat3(uNormalM) * aVBitangent);
+        vec3 n = normalize(mat3(uNormalM) * aVNormal);
+        mat3 tbn = transpose(mat3(t, b, n));
+
+        vec3 light_pos = vec3(1, 2, 0);
+        ts_light_pos = tbn * light_pos;
+        ts_view_pos = tbn * vec3(0, 0, 0);
+        ts_frag_pos = tbn * ts_frag_pos;
+
+        vTextureCoord = aTexCoord;
+    }
+}
+        </script>
+        <script id="fragment-shader-2d" type="x-shader/x-fragment">
+            precision highp float;
+            // All variables for Environment Mapping
+            // Passed in from the vertex shader.
+            varying vec3 vWorldPosition;
+            varying vec3 vWorldNormal;
+            
+            // The texture
+            uniform samplerCube uTex;
+            
+            // The position of the camera
+            uniform vec3 uWorldCameraPos;
+            uniform int texType2;
+            
+            // All variables for Texture Mapping
+            varying highp vec2 vTextureCoord;
+            varying highp vec3 vLighting;
+            uniform sampler2D uSampler2D;
+            uniform bool uShadingB;
+            
+            // All variables for Bump Mapping
+            varying vec3 ts_light_pos;
+            varying vec3 ts_view_pos;
+            varying vec3 ts_frag_pos;
+            
+            void main(void) {
+                if (texType2 == 0){
+                    highp vec4 texelColor = texture2D(uSampler2D, vTextureCoord);
+                    if (uShadingB) {
+                        gl_FragColor = vec4(texelColor.rgb * vLighting, texelColor.a);
+                    } else {
+                        gl_FragColor = texelColor;
+                    }
+                } else if (texType2 == 1) {
+                    vec3 worldNormal = normalize(vWorldNormal);
+                    vec3 eyeToSurfaceDir = normalize(vWorldPosition - uWorldCameraPos);
+                    vec3 direction = reflect(eyeToSurfaceDir, worldNormal);
+                    gl_FragColor = textureCube(uTex, direction);
+                } else {
+                    vec3 light_dir = normalize(ts_light_pos - ts_frag_pos);
+                    vec3 view_dir = normalize(ts_view_pos - ts_frag_pos);
+                    vec3 albedo = texture2D(uSampler2D, vTextureCoord).rgb;
+                    vec3 ambient = 0.3 * albedo;
+                    vec3 norm = normalize(texture2D(uSampler2D, vTextureCoord).rgb * 2.0 - 1.0);
+                    float diffuse = max(dot(light_dir, norm), 0.0);
+                    gl_FragColor = vec4(diffuse * albedo + ambient, 1.0);
+                }
+            }
+        </script>
+        
     </body>
 </html>

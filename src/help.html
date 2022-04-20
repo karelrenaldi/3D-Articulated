@@ -4,64 +4,85 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Help Me Page</title>
+        <title>Help Page</title>
     </head>
     <body>
-        <h1>Help Me Please</h1>
+        <h1>Help Page</h1>
         <div class="help-content">
-            <h2>1. Save/Load</h2>
-            <p>Save adalah tombol yang berfungsi melakukan penyimpanan hollow objek</p>
-            <p>Load adalah tombol yang berfungsi memuat hollow objek dari komputer</p>
+            <h2>1. Animation Control</h2>
+            <p>Dengan menekan tombol ini maka model objek articulated akan dimainkan animasinya. Pastikan sudah memuat/load model yang ingin dijalankan animasinya.</p>
         </div>
         <div class="help-content">
-            <h2>2. Rotation</h2>
-            <p>Rotation adalah fungsi untuk membuat object hollow 3D berotasi sesuai dengan sumbunya</p>
+            <h2>2. Auto Rotation Control</h2>
+            <p>Fitur ini berfungsi untuk membuat model objek articulated berputar secara otomatis.</p>
             <ul>
-                <li>Rotate X : object hollow berotasi pada sumbu X</li>
-                <li>Rotate Y : object hollow berotasi pada sumbu Y</li>
-                <li>Rotate Z : object hollow berotasi pada sumbu Z</li>
+                <li>Rotate Off : object tidak berotasi otomatis</li>
+                <li>Rotate X : object berotasi otomatis pada flag sumbu X</li>
+                <li>Rotate Y : object berotasi otomatis pada flag sumbu Y</li>
+                <li>Rotate Z : object berotasi otomatis pada flag sumbu Z</li>
             </ul>
         </div>
         <div class="help-content">
-            <h2>3. Translasi</h2>
-            <p>Translasi adalah fungsi untuk membuat object hollow 3D melakukan translasi sesuai dengan sumbunya</p>
+            <h2>3. Shading Mode</h2>
+            <p>Fitur untuk memilih mode tampilan di canvas.</p>
             <ul>
-                <li>Translasi X : object hollow bertranslasi pada sumbu X</li>
-                <li>Translasi Y : object hollow bertranslasi pada sumbu Y</li>
-                <li>Translasi Z : object hollow bertranslasi pada sumbu Z</li>
+                <li>Default View : object articulated model ditampilkan secara default (mode shading off)</li>
+                <li>Shading Mode : mengaktifkan mode shading dan memperbarui object articulated model yang ditampilkan</li>
             </ul>
         </div>
         <div class="help-content">
-            <h2>4. Scale</h2>
-            <p>Scaling adalah fungsi untuk membuat object hollow 3D melakukan scale atau perubahan ukuran</p>
-        </div>
-        <div class="help-content">
-            <h2>5. Camera Control</h2>
-            <p>Camera control berfungsi untuk mengatur kamera view dan menggerakan kamera mengitari model</p>
-            <p>Cara menggunakannya dengan menggeserkan slider</p>
-        </div>
-        <div class="help-content">
-            <h2>6. Reset</h2>
-            <p>Button yang berfungsi untuk mengembalikan view ke settingan default/semula</p>
-        </div>
-        <div class="help-content">
-            <h2>7. Menu Help Me</h2>
-            <p>Menu help berfungsi untuk melihat penjelasan mengenai fungsi - fungsi yang dapat digunakan.</p>
-            <p>Cara menggunakannya dengan menekan tombol Help Me Please dan akan diarahkan ke page baru yang berisi help menu</p>
-        </div>
-        <div class="help-content">
-            <h2>8. Projection View</h2>
-            <p>Ada 3 buah projection view yang dapat digunakan</p>
+            <h2>4. Projection Mode</h2>
+            <p>Fitur untuk memilih jenis projection view di canvas.</p>
             <ul>
                 <li>Orthographic View</li>
                 <li>Oblique View</li>
                 <li>Perspective View</li>
             </ul>
-            <p>Cara menggunakannya adalah dengan menekan button dari view yang diinginkan</p>
         </div>
         <div class="help-content">
-            <h2>9 . Shading</h2>
-            <p>Menu yang berfungsi untuk mengaktifkan atau menonaktifkan shading.</p>
+            <h2>5. Texture Mapping Mode</h2>
+            <p>Fitur untuk mengubah tekstur dari model yang ditampilkan di canvas.</p>
+            <ul>
+                <li>Image Mapping : tekstur object diambil dari gambar bertekstur kayu</li>
+                <li>Environment Mapping : tekstur diambil dari ruang cube map</li>
+                <li>Bump Mapping : diberikan tekstur bump atau benjolan pada object sehingga tidak smooth dan terlihat lebih realistis</li>
+            </ul>
+        </div>
+        <div class="help-content">
+            <h2>6. Model View Control</h2>
+            <p>Fitur untuk mengatur world view dengan cara merubah posisi, sudut rotasi, dan scaling dari model view matriks.</p>
+            <ul>
+                <li>Slider Translasi : berisi 3 slider (sumbu X, Y, dan Z) untuk memasukkan nilai perubahan posisi dan melakukan translasi pada object</li>
+                <li>Slider Rotasi : berisi 3 slider (sumbu X, Y, dan Z) untuk memasukkan nilai perubahan sudut dan melakukan rotasi pada object</li>
+                <li>Slider Scale : berisi 3 slider (sumbu X, Y, dan Z) untuk memasukkan nilai perubahan scale dan melakukan scaling pada object</li>
+            </ul>
+        </div>
+        <div class="help-content">
+            <h2>7. Model Direct Control</h2>
+            <p>Terdiri dari slider-slider yang akan menggerakkan bagian sendi-sendi model.</p>
+        </div>
+        <div class="help-content">
+            <h2>8. Camera Setting</h2>
+            <p>Fitur untuk merubah pengaturan pada camera view</p>
+            <ul>
+                <li>Slider Translasi : berisi 3 slider (sumbu X, Y, dan Z) untuk memasukkan nilai perubahan posisi dan mengatur titik pusat yang diamati</li>
+                <li>Slider Rotasi : berisi 3 slider (sumbu X, Y, dan Z) untuk memasukkan nilai perubahan sudut dan mengatur upward direction</li>
+                <li>Slider Scale : berisi 3 slider (sumbu X, Y, dan Z) untuk memasukkan nilai perubahan scale dan mengatur posisi mata viewer</li>
+            </ul>
+        </div>
+        <div class="help-content">
+            <h2>9. Save/Load</h2>
+            <p>'Save Model' adalah tombol yang berfungsi melakukan penyimpanan articulated model</p>
+            <p>'Choose File' adalah tombol yang berfungsi memuat file articulated model dari komputer. Dengan menekan tombol akan muncul pop up untuk memilih file dari penyimpanan local.</p>
+        </div>
+        <div class="help-content">
+            <h2>10. Menu Help</h2>
+            <p>Menu help berfungsi untuk melihat penjelasan mengenai fungsi - fungsi yang dapat digunakan.</p>
+            <p>Cara menggunakannya dengan menekan tombol Help Me dan akan diarahkan ke page baru yang berisikan help menu dan penjelasan fitur.</p>
+        </div>
+        <div class="help-content">
+            <h2>11. Reset</h2>
+            <p>Button yang berfungsi untuk mengembalikan view ke settingan default/semula.</p>
         </div>
     </body>
 </html>

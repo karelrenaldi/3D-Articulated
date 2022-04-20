@@ -10,8 +10,17 @@ export type GLObject = {
 };
 
 export type BufferVertex = {
-  position: WebGLBuffer;
-  normal: WebGLBuffer;
+  // position: WebGLBuffer;
+  // normal: WebGLBuffer;
   color: WebGLBuffer;
-  indices: WebGLBuffer;
+  // indices: WebGLBuffer;
+  // tangent: WebGLBuffer;
+  // bitangent: WebGLBuffer;
+  // texBuffer: WebGLBuffer;
 };
+
+export type NodeModel = {
+  transform: number[];
+  sibling: number;
+  child: number;
+}

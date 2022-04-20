@@ -16,10 +16,12 @@ const normalizeVector = (v: number[]): number[] => {
     : [0, 0, 0];
 };
 
-const getVectorNormals = (vPosition: number[]): number[] => {
+const getVectorNormals = (vPosition: number[]) => {
   const n = vPosition.length;
 
-  let vNormals = [];
+  let vecNormals = [];
+  let vecTangents = [];
+  let vecBitangents = [];
   for (let i = 0; i < n; i += 12) {
     const p1 = [vPosition[i], vPosition[i + 1], vPosition[i + 2]];
     const p2 = [vPosition[i + 3], vPosition[i + 4], vPosition[i + 5]];
@@ -30,13 +32,17 @@ const getVectorNormals = (vPosition: number[]): number[] => {
 
     const normalDirection = crossVectors(vec1, vec2);
     const vecNormal = normalizeVector(normalDirection);
+    const vecTangent = normalizeVector(vec1);
+    const vecBitangent = normalizeVector(vec2);
 
     for (let j = 0; j < 4; j++) {
-      vNormals = vNormals.concat(vecNormal);
+      vecNormals = vecNormals.concat(vecNormal);
+      vecTangents = vecTangent.concat(vecTangent);
+      vecBitangents = vecBitangent.concat(vecBitangent);
     }
   }
 
-  return vNormals;
+  return [vecNormals, vecTangents, vecBitangents];
 };
 
 export { subtractVectors, normalizeVector, crossVectors, getVectorNormals };
