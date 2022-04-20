@@ -617,7 +617,7 @@ export class GLHelper {
     // }
     var degree = 0;
     if (this.isAnimate) {
-      this.theta[id] += 0.2;
+      this.theta[id] += 0.02;
       degree = this.nodeListData[id].start_degree + this.theta[id];
       if (degree > this.nodeListData[id].max_degree) {
         this.theta[id] = 0;

@@ -267,6 +267,293 @@ const main = async (): Promise<void> => {
     glHelper.setEyeVal(Number(eyeZ.value), 2);
   });
 
+  var v1 = {
+    xDown: 0,
+    xUp: 8,
+    yDown: 0,
+    yUp: 15,
+    zDown: 0,
+    zUp: 8
+}
+var v2 = {
+    xDown: v1.xDown-15,
+    xUp: v1.xDown,
+    yDown: v1.yUp-4,
+    yUp: v1.yUp,
+    zDown: v1.zDown,
+    zUp: v1.zUp
+}
+var v3 = {
+    xDown: v1.xUp,
+    xUp: v1.xUp+15,
+    yDown: v1.yUp-4,
+    yUp: v1.yUp,
+    zDown: v1.zDown,
+    zUp: v1.zUp
+}
+var v4 = {
+    xDown: v1.xDown,
+    xUp: v1.xUp,
+    yDown: v1.yUp-4,
+    yUp: v1.yUp,
+    zDown: v1.zDown-15,
+    zUp: v1.zDown
+}
+var v5 = {
+    xDown: v1.xDown,
+    xUp: v1.xUp,
+    yDown: v1.yUp-4,
+    yUp: v1.yUp,
+    zDown: v1.zUp,
+    zUp: v1.zUp+15
+}
+
+function zubairModel() {
+    const z = {
+        "num_point": 40,
+        "vertex": [
+            // 1
+            [v1.xDown, v1.yDown, v1.zUp], [v1.xUp,v1.yDown,v1.zUp], [v1.xUp, v1.yUp, v1.zUp], [v1.xDown,v1.yUp,v1.zUp], 
+            [v1.xDown, v1.yDown, v1.zDown], [v1.xDown,v1.yUp,v1.zDown], [v1.xUp, v1.yUp,v1.zDown], [v1.xUp,v1.yDown,v1.xDown],
+            [v2.xDown, v2.yDown, v2.zUp], [v2.xUp,v2.yDown,v2.zUp], [v2.xUp, v2.yUp, v2.zUp], [v2.xDown,v2.yUp,v2.zUp], 
+            [v2.xDown, v2.yDown, v2.zDown], [v2.xDown,v2.yUp,v2.zDown], [v2.xUp, v2.yUp,v2.zDown], [v2.xUp,v2.yDown,v2.xDown],
+            [v3.xDown, v3.yDown, v3.zUp], [v3.xUp,v3.yDown,v3.zUp], [v3.xUp, v3.yUp, v3.zUp], [v3.xDown,v3.yUp,v3.zUp], 
+            [v3.xDown, v3.yDown, v3.zDown], [v3.xDown,v3.yUp,v3.zDown], [v3.xUp, v3.yUp,v3.zDown], [v3.xUp,v3.yDown,v3.xDown],
+            [v4.xDown, v4.yDown, v4.zUp], [v4.xUp,v4.yDown,v4.zUp], [v4.xUp, v4.yUp, v4.zUp], [v4.xDown,v4.yUp,v4.zUp], 
+            [v4.xDown, v4.yDown, v4.zDown], [v4.xDown,v4.yUp,v4.zDown], [v4.xUp, v4.yUp,v4.zDown], [v4.xUp,v4.yDown,v4.xDown],
+            [v5.xDown, v5.yDown, v5.zUp], [v5.xUp,v5.yDown,v5.zUp], [v5.xUp, v5.yUp, v5.zUp], [v5.xDown,v5.yUp,v5.zUp], 
+            [v5.xDown, v5.yDown, v5.zDown], [v5.xDown,v5.yUp,v5.zDown], [v5.xUp, v5.yUp,v5.zDown], [v5.xUp,v5.yDown,v5.xDown],
+            // 
+            // [-12,-2,4], [2,-2,4], [2,2,4], [-12,2,4], 
+            // [-12,-2,-4], [-12,2,-4], [2,2,-4], [2,-2,-4],
+            // [-1, 1, 4], [1, 1, 4], [1, -6, 4], [-1, -6, 4], [-1, 1, 7], [-1, -6, 7], [1,  -6, 7], [1, 1, 7],
+            // [-1, -6, 4], [1, -6, 4], [1, -11, 4], [-1, -11, 4], [-1, -6, 7], [-1, -11, 7], [1,  -11, 7], [1, -6, 7],
+            // [-1, 1, -4], [1, 1, -4], [1, -6, -4], [-1, -6, -4], [-1, 1, -7], [-1,  -6, -7], [1,  -6, -7], [1, 1, -7],
+            // [-1, -6, -4], [1, -6, -4], [1, -11, -4], [-1, -11, -4], [-1, -6, -7], [-1,  -11, -7], [1,  -11, -7], [1, -6, -7],
+            // [-11, 1, 4], [-9, 1, 4], [-9, -6, 4], [-11, -6, 4], [-11, 1, 7], [-11, -6, 7], [-9,  -6, 7], [-9, 1, 7],
+            // [-11, -6, 4], [-9, -6, 4], [-9, -11, 4], [-11, -11, 4], [-11, -6, 7], [-11, -11, 7], [-9,  -11, 7], [-9, -6, 7],
+            // [-11, 1, -4], [-9, 1, -4], [-9, -6, -4], [-11, -6, -4], [-11, 1, -7], [-11, -6, -7], [-9,  -6, -7], [-9, 1, -7],
+            // [-11, -6, -4], [-9, -6, -4], [-9, -11, -4], [-11, -11, -4], [-11, -6, -7], [-11, -11, -7], [-9,  -11, -7], [-9, -6, -7],
+            // [8, -1, 2], [2, -1, 2], [2, 1, 2], [8, 1, 2], [8, -1, -2], [8,  1, -2], [2,  1, -2], [2, -1, -2],
+            // [14, -1, 2], [8, -1, 2], [8, 1, 2], [14, 1, 2], [14, -1, -2], [14,  1, -2], [8,  1, -2], [8, -1, -2]
+        ],
+        "num_rusuk" : 5,
+        "rusuk" : [
+            {
+                "num_sisi" : 6,
+                "index": [[0, 1, 2, 3],[4, 5, 6, 7],[5, 3, 2, 6],[4, 7, 1, 0], [4, 0, 3, 5],[7, 6, 2, 1]],
+            },
+            {
+                "num_sisi" : 6,
+                "index": [[8, 9, 10, 11], [12, 13, 14, 15], [13, 11, 10, 14], [12, 15, 9, 8], [12, 8, 11, 13], [15, 14, 10, 9]],
+            },
+            {
+                "num_sisi" : 6,
+                "index": [[0+16, 1+16, 2+16, 3+16],[4+16, 5+16, 6+16, 7+16],[5+16, 3+16, 2+16, 6+16],[4+16, 7+16, 1+16, 0+16], [4+16, 0+16, 3+16, 5+16],[7+16, 6+16, 2+16, 1+16]],
+                // "index": [[16, 17, 18, 19], [20, 21, 22, 23], [21, 19, 18, 22], [20, 23, 17, 16], [20, 16, 19, 21], [23, 22, 18, 17]],
+            },
+            {
+                "num_sisi" : 6,
+                "index": [[24, 25, 26, 27], [28, 29, 30, 31], [29, 27, 26, 30], [28, 31, 25, 24], [28, 24, 27, 29], [31, 30, 26, 25]],
+            },
+            {
+                "num_sisi" : 6,
+                "index": [[32, 33, 34, 35], [36, 37, 38, 39], [37, 35, 34, 38], [36, 39, 33, 32], [36, 32, 35, 37], [39, 38, 34, 33]],
+            },
+            // {
+            //     "num_sisi" : 6,
+            //     "index": [[40, 41, 42, 43], [44, 45, 46, 47], [45, 43, 42, 46], [44, 47, 41, 40], [44, 40, 43, 45], [47, 46, 42, 41]],
+            // },
+            // {
+            //     "num_sisi" : 6,
+            //     "index": [[48, 49, 50, 51], [52, 53, 54, 55], [53, 51, 50, 54], [52, 55, 49, 48], [52, 48, 51, 53], [55, 54, 50, 49]],
+            // },
+            // {
+            //     "num_sisi" : 6,
+            //     "index": [[56, 57, 58, 59], [60, 61, 62, 63], [61, 59, 58, 62], [60, 63, 57, 56], [60, 56, 59, 61], [63, 62, 58, 57]],
+            // },
+            // {
+            //     "num_sisi" : 6,
+            //     "index": [[64, 65, 66, 67], [68, 69, 70, 71], [69, 67, 66, 70], [68, 71, 65, 64], [68, 64, 67, 69], [71, 70, 66, 65]],
+            // },
+            // {
+            //     "num_sisi" : 6,
+            //     "index": [[72, 73, 74, 75], [76, 77, 78, 79], [77, 75, 74, 78], [76, 79, 73, 72], [76, 72, 75, 77], [79, 78, 74, 73]],
+            // },
+            // {
+            //     "num_sisi" : 6,
+            //     "index": [[80, 81, 82, 83], [84, 85, 86, 87], [85, 83, 82, 86], [84, 87, 81, 80], [84, 80, 83, 85], [87, 86, 82, 81]],
+            // }
+        ],
+        "nodes": {
+            // "0": {
+            //     "pointNode": [0, 0, 0],
+            //     "sibling": null,
+            //     "child": 1,
+            //     "rotation_axis": 3,
+            //     "max_degree": 180,
+            //     "min_degree": 180,
+            //     "start_degree": 0,
+            //     "clockwise": 0
+            // },
+            // "1": {
+            //     "pointNode": [0, 0, 0],
+            //     "sibling": 3,
+            //     "child": 2,
+            //     "rotation_axis": 2,
+            //     "max_degree": 45,
+            //     "min_degree": -45,
+            //     "start_degree": 45,
+            //     "clockwise": 0
+            // },
+            // "2": {
+            //     "pointNode": [0, -5, 0],
+            //     "sibling": null,
+            //     "child": null,
+            //     "rotation_axis": 2,
+            //     "max_degree": 45,
+            //     "min_degree": -45,
+            //     "start_degree": 0,
+            //     "clockwise": 0
+            // },
+            // "3": {
+            //     "pointNode": [0, 0, 0],
+            //     "sibling": null,
+            //     "child": null,
+            //     "rotation_axis": 2,
+            //     "max_degree": 45,
+            //     "min_degree": -45,
+            //     "start_degree": -45,
+            //     "clockwise": 1
+            // },
+            // "4": {
+            //     "pointNode": [0, -5, 0],
+            //     "sibling": null,
+            //     "child": null,
+            //     "rotation_axis": 2,
+            //     "max_degree": 45,
+            //     "min_degree": -45,
+            //     "start_degree": 0,
+            //     "clockwise": 1
+            // },
+            "0": {
+                "pointNode": [v1.xDown, v1.yDown, v1.zDown],
+                // "pointNode": [(v1.xDown+v1.xUp)/2, (v1.yDown+v1.yUp)/2, (v1.zDown+v1.zUp)/2],
+                "sibling": null,
+                "child": 1,
+                "rotation_axis": 2,
+                "max_degree": 360,
+                "min_degree": 0,
+                "start_degree": 0,
+                "clockwise": 0
+            },
+            "1": {
+                "pointNode": [v2.xDown, v2.yDown, v2.zDown],
+                "sibling": 2,
+                "child": null,
+                "rotation_axis": 0,
+                "max_degree": 360,
+                "min_degree": 0,
+                "start_degree": 0,
+                "clockwise": 0
+            },
+            "2": {
+                "pointNode": [v3.xDown, v3.yDown, v3.zDown],
+                "sibling": 3,
+                "child": null,
+                "rotation_axis": 0,
+                "max_degree": 360,
+                "min_degree": 0,
+                "start_degree": 0,
+                "clockwise": 0
+            },
+            "3": {
+                "pointNode": [v4.xDown, v4.yDown, v4.zDown],
+                "sibling": 4,
+                "child": null,
+                "rotation_axis": 1,
+                "max_degree": 360,
+                "min_degree": 0,
+                "start_degree": 0,
+                "clockwise": 1
+            },
+            "4": {
+                "pointNode": [v5.xDown, v5.yDown, v5.zDown],
+                "sibling": null,
+                "child": null,
+                "rotation_axis": 1,
+                "max_degree": 360,
+                "min_degree": 0,
+                "start_degree": 0,
+                "clockwise": 1
+            }
+            // "5": {
+            //     "pointNode": [-10, 0, 0],
+            //     "sibling": 7,
+            //     "child": 6,
+            //     "rotation_axis": 2,
+            //     "max_degree": 45,
+            //     "min_degree": -45,
+            //     "start_degree": -45,
+            //     "clockwise": 1
+            // },
+            // "6": {
+            //     "pointNode": [-10, -5, 0],
+            //     "sibling": null,
+            //     "child": null,
+            //     "rotation_axis": 2,
+            //     "max_degree": 45,
+            //     "min_degree": -45,
+            //     "start_degree": 0,
+            //     "clockwise": 1
+            // },
+            // "7": {
+            //     "pointNode": [-10, 0, 0],
+            //     "sibling": 9,
+            //     "child": 8,
+            //     "rotation_axis": 2,
+            //     "max_degree": 45,
+            //     "min_degree": -45,
+            //     "start_degree": 45,
+            //     "clockwise": 0
+            // },
+            // "8": {
+            //     "pointNode": [-10, -5, 0],
+            //     "sibling": null,
+            //     "child": null,
+            //     "rotation_axis": 2,
+            //     "max_degree": 45,
+            //     "min_degree": -45,
+            //     "start_degree": 0,
+            //     "clockwise": 0
+            // },
+            // "9": {
+            //     "pointNode": [2, 0, 0],
+            //     "sibling": null,
+            //     "child": 10,
+            //     "rotation_axis": 2,
+            //     "max_degree": 90,
+            //     "min_degree": 0,
+            //     "start_degree": 0,
+            //     "clockwise": 0
+            // },
+            // "10": {
+            //     "pointNode": [7, 0, 0],
+            //     "sibling": null,
+            //     "child": null,
+            //     "rotation_axis": 2,
+            //     "max_degree": 0,
+            //     "min_degree": -90,
+            //     "start_degree": 0,
+            //     "clockwise": 0
+            // }
+        }
+    };
+  
+    return z;
+  }
+  object = zubairModel();
+
   const canvas = document.querySelector("#gl-canvas") as HTMLCanvasElement;
   canvas.width = 720;
   canvas.height = 520;
@@ -291,6 +578,7 @@ const main = async (): Promise<void> => {
 
   glHelper.setTexType(0);
   glHelper.drawScene();
+  glHelper.drawModel(zubairModel());
   const render = () => {
     if (glHelper.vPos) {
       glHelper.drawScene();
