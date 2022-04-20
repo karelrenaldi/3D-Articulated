@@ -404,12 +404,12 @@ const main = async (): Promise<void> => {
         glHelper.cleanScreen();
         var stackModelViewMatrix: number[][] = [[]];
         // rotate camera
-        rotationCamera[0] += 0.0001;
-        rotationCamera[1] += 0.0001;
-        rotationCamera[2] += 0.0001;
-        glHelper.modelViewMatrix = m4.xRotate(glHelper.modelViewMatrix, rotationCamera[0]);
-        glHelper.modelViewMatrix = m4.yRotate(glHelper.modelViewMatrix, rotationCamera[1]);
-        glHelper.modelViewMatrix = m4.zRotate(glHelper.modelViewMatrix, rotationCamera[2]);
+        // rotationCamera[0] += 0.0001;
+        // rotationCamera[1] += 0.0001;
+        // rotationCamera[2] += 0.0001;
+        // glHelper.modelViewMatrix = m4.xRotate(glHelper.modelViewMatrix, rotationCamera[0]);
+        // glHelper.modelViewMatrix = m4.yRotate(glHelper.modelViewMatrix, rotationCamera[1]);
+        // glHelper.modelViewMatrix = m4.zRotate(glHelper.modelViewMatrix, rotationCamera[2]);
 
         glHelper.traverse(0, glHelper.modelViewMatrix, stackModelViewMatrix);
     }
