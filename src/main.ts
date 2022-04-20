@@ -338,6 +338,7 @@ function zubairModel() {
             // [14, -1, 2], [8, -1, 2], [8, 1, 2], [14, 1, 2], [14, -1, -2], [14,  1, -2], [8,  1, -2], [8, -1, -2]
         ],
         "num_rusuk" : 5,
+        "texture": "image",
         "rusuk" : [
             {
                 "num_sisi" : 6,
@@ -576,9 +577,9 @@ function zubairModel() {
   const glHelper = new GLHelper(gl, shaderProgram);
   listConstantVar.glHelper = glHelper;
 
+  glHelper.drawModel(zubairModel());
   glHelper.setTexType(0);
   glHelper.drawScene();
-  glHelper.drawModel(zubairModel());
   const render = () => {
     if (glHelper.vPos) {
       glHelper.drawScene();
@@ -595,6 +596,7 @@ function zubairModel() {
 
   // save file.
   saveButton.addEventListener("click", () => {
+    object = glHelper.objModel;
     const fileData = object;
     const fileName = `${CreateRandomString(30)}.json`;
     const fileType = "application/json";
@@ -612,6 +614,16 @@ function zubairModel() {
       const rs = e.target?.result;
       const data = JSON.parse(rs as string);
       object = data;
+      if (data.texture == "image") {
+        glHelper.setTexType(0);
+      } else if (data.texture == "bump") {
+        glHelper.setTexType(2);
+      } else if (data.texture == "environtment") {
+        glHelper.setTexType(1);
+      } else {
+        glHelper.setTexType(0);
+      }
+      data.texture 
       glHelper.drawModel(data);
     };
 

@@ -670,21 +670,34 @@ export class GLHelper {
   }
 
   setTexType(val: number) {
+    // if (val == 0) {
+    //   this.objModel.texture = "image";
+    // } else if (val == 1) {
+    //   this.objModel.texture = "environtment";
+    // } else if (val == 2) {
+    //   this.objModel.texture = "bump";
+    // }   
     this.mappingTex = val;
     console.log(val);
     switch (val) {
       case 0:
         this.textureUrl("../assets/img/img2.png");
+        this.objModel.texture = "image";
         break;
-
-      case 1:
-        // this.textureUrl('../assets/img/env.png')
+        case 1:
+          // this.textureUrl('../assets/img/env.png')
+        this.objModel.texture = "environtment";
         this.envTex();
         break;
 
-      default:
-        this.textureUrl("../assets/img/img.png");
-        break;
+        case 2:
+          this.textureUrl("../assets/img/img.png");
+          this.objModel.texture = "bump";
+
+        default:
+          this.textureUrl("../assets/img/img2.png");
+          this.objModel.texture = "image";
+          break;
     }
   }
 
