@@ -594,25 +594,22 @@ export class GLHelper {
     let tx = this.nodeListData[id].pointNode[0];
     let ty = this.nodeListData[id].pointNode[1];
     let tz = this.nodeListData[id].pointNode[2];
-    // let tx = this.nodeListData[id].joint_point[0];
-    // let ty = this.nodeListData[id].joint_point[1];
-    // let tz = this.nodeListData[id].joint_point[2];
     this.theta[id] = this.nodeListData[id].start_degree;
     let rotAxis = this.nodeListData[id].rotation_axis;
     // for (let i = 0; i < 3; i++) {
-    //   // if (this.theta[id][i] > this.nodeListData[id].maxDegree[i]) {
-    //   //   this.theta[id] = this.nodeListData[id].maxDegree[i];
-    //   // }
-    //   // if (this.theta[id][i] < this.nodeListData[id].minDegree[i]) {
-    //   //   this.theta[id] = this.nodeListData[id].minDegree[i];
-    //   // }
-    //   if (this.theta[id][i] > this.nodeListData[id].max_degree[i]) {
-    //     this.theta[id] = this.nodeListData[id].max_degree[i];
-    //   }
-    //   if (this.theta[id][i] < this.nodeListData[id].min_degree[i]) {
-    //     this.theta[id] = this.nodeListData[id].min_degree[i];
-    //   }
-    // }
+      // if (this.theta[id][i] > this.nodeListData[id].maxDegree[i]) {
+      //   this.theta[id] = this.nodeListData[id].maxDegree[i];
+      // }
+      // if (this.theta[id][i] < this.nodeListData[id].minDegree[i]) {
+      //   this.theta[id] = this.nodeListData[id].minDegree[i];
+      // }
+      // }
+    if (this.theta[id][rotAxis] > this.nodeListData[id].max_degree) {
+      this.theta[id][rotAxis] = this.nodeListData[id].max_degree;
+    }
+    if (this.theta[id][rotAxis] < this.nodeListData[id].min_degree) {
+      this.theta[id][rotAxis] = this.nodeListData[id].min_degree;
+    }
 
     mNode = m4.translate(mNode, tx,ty, tz);
     // console.log("this.theta[id]");
