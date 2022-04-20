@@ -2,7 +2,7 @@ const DEFAULT_VALUE = {
   scale: [1, 1, 1],
   position: [0, 0, 0],
   rotation: [0, 0, 0],
-  eye: [0, 20, -20],
+  eye: [0, 0, 40],
   center: [0, 0, 0],
   up: [0, 1, 0],
   rotateToggle: true,
