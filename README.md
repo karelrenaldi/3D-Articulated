@@ -1,22 +1,16 @@
-# Grafika Komputer Project 2
+# Computer Graphics Project 3
 
-## Deskripsi
+## Description
 
-Program ini memperlihatkan articulated model menggunakan WebGL dengan cara load file yang ada di folder model. Pengguna dapat melakukan berbagai macam aksi pada objek, kamera, dan sudut-sudut objek.
+This program displays an articulated model using WebGL by loading files from the model folder. Users can perform various actions on objects, the camera, and object vertices, etc.
 
-## Created By :
+## Created By:
 
-<br> Kelas K04 - Kelompok 15
+<br> Class K04 - Group 15  
 <br> 13519172 / Muhammad Zubair  
 <br> 13519180 / Karel Renaldi  
-<br> 13519183 / Afifah Fathimah Q
+<br> 13519183 / Afifah Fathimah Q  
 
 ## How To Run
-
-Cara 1 :
-1. `yarn`
+1. `yarn`  
 2. `yarn dev`
-
-Cara 2 :
-1. `npm install`
-2. `npm start`
